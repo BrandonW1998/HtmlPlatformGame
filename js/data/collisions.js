@@ -16,6 +16,3 @@ Array.prototype.parse2D = function () {
 
   return rows;
 };
-
-const parsedCollisions = collisionsLevel1.parse2D();
-console.log(parsedCollisions);
