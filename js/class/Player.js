@@ -1,5 +1,6 @@
-class Player {
-  constructor({ collisionBlocks = [] }) {
+class Player extends Sprite {
+  constructor({ collisionBlocks = [], imageSrc }) {
+    super({ imageSrc });
     this.position = {
       x: 200,
       y: 200,
@@ -10,8 +11,6 @@ class Player {
       y: 0,
     };
 
-    this.width = 25;
-    this.height = 25;
     this.sides = {
       bottom: this.position.y + this.height,
     };
@@ -20,14 +19,18 @@ class Player {
     this.collisionBlocks = collisionBlocks;
   }
 
-  draw() {
-    c.fillStyle = "red";
+  update() {
+    c.fillStyle = "blue";
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+    this.position.x += this.velocity.x;
+
+    this.checkForHorizontalCollisions();
+    this.applyGravity();
+    this.checkForVerticalCollisions();
   }
 
-  update() {
-    this.position.x += this.velocity.x;
-    // Check for horizontal collision
+  checkForHorizontalCollisions() {
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i];
       // If a collision exists
@@ -50,12 +53,14 @@ class Player {
         }
       }
     }
+  }
 
-    // Apply gravity
+  applyGravity() {
     this.velocity.y += this.gravity;
     this.position.y += this.velocity.y;
+  }
 
-    // Check for vertical collision
+  checkForVerticalCollisions() {
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i];
       // If a collision exists
