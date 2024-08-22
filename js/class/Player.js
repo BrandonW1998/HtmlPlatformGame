@@ -1,6 +1,6 @@
 class Player extends Sprite {
-  constructor({ collisionBlocks = [], imageSrc }) {
-    super({ imageSrc });
+  constructor({ collisionBlocks = [], imageSrc, frameRate }) {
+    super({ imageSrc, frameRate });
     this.position = {
       x: 200,
       y: 200,
@@ -20,8 +20,9 @@ class Player extends Sprite {
   }
 
   update() {
-    c.fillStyle = "blue";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    // Player's collision (blue)
+    // c.fillStyle = "rgba(0, 0, 255, 0.5)";
+    // c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     this.position.x += this.velocity.x;
 
