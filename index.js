@@ -4,24 +4,8 @@ const c = canvas.getContext("2d");
 canvas.width = 64 * 16;
 canvas.height = 64 * 9;
 
-const collisionBlocks = [];
-
 const parsedCollisions = collisionsLevel1.parse2D();
-parsedCollisions.forEach((row, y) => {
-  row.forEach((symbol, x) => {
-    if (symbol === 292) {
-      // push new collision into collisionBlocks array
-      collisionBlocks.push(
-        new CollisionBlock({
-          position: {
-            x: x * 64,
-            y: y * 64,
-          },
-        })
-      );
-    }
-  });
-});
+const collisionBlocks = parsedCollisions.createObjectsFrom2D();
 
 const backgroundLevel1 = new Sprite({
   position: {
@@ -31,7 +15,9 @@ const backgroundLevel1 = new Sprite({
   imageSrc: "./img/backgroundLevel1.png",
 });
 
-const player = new Player();
+const player = new Player({
+  collisionBlocks,
+});
 
 const keys = {
   // Up
