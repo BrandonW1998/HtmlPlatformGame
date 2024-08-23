@@ -20,7 +20,7 @@ class Player extends Sprite {
   }
 
   update() {
-    // Player's area (blue)
+    //  Display player's area (blue)
     // c.fillStyle = "rgba(0, 0, 255, 0.5)";
     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
@@ -33,7 +33,7 @@ class Player extends Sprite {
 
     this.updateHitbox();
 
-    // Player's hitbox (red)
+    // Display player's hitbox (red)
     // c.fillRect(
     //   this.hitbox.position.x,
     //   this.hitbox.position.y,
@@ -67,6 +67,7 @@ class Player extends Sprite {
     this.frameRate = this.animations[name].frameRate;
     this.frameBuffer = this.animations[name].frameBuffer;
     this.loop = this.animations[name].loop;
+    this.currentAnimation = this.animations[name];
   }
 
   updateHitbox() {
